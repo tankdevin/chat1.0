@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9,chrome=1">
+<title>{$name}</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<script src="__STATIC__/chat/Scripts/jquery-1.9.1.min.js"></script><script src="__STATIC__/chat/Scripts/jquery-ui.min.js"></script><link rel="stylesheet" href="__STATIC__/chat/Content/bootstrap.min.css"><!--[if lte IE 6]>
+  <link rel="stylesheet" type="text/css" href="http://120.79.39.52:8088/plugins/bootstrap/css/bootstrap-ie6.min.css">
+  <link rel="stylesheet" type="text/css" href="http://120.79.39.52:8088/plugins/bootstrap/css/ie.css">
+  <![endif]-->
+    <!--[if lt IE 9]>
+  <script src="http://120.79.39.52:8088/plugins/bootstrap/js/html5shiv.min.js"></script>
+  <script src="http://120.79.39.52:8088/plugins/bootstrap/js/respond.min.js"></script>
+  <![endif]--><script src="__STATIC__/chat/Scripts/bootstrap.js"></script><link rel="stylesheet" href="__STATIC__/chat/Content/group.css?t=1509325606" /><script type="text/javascript" src="__STATIC__/chat/Scripts/socket.io.js"></script><script type="text/javascript" src="__STATIC__/chat/Scripts/jquery.colorpicker.js"></script><link rel="stylesheet" href="__STATIC__/chat/Content/group.css?t=1509325606" /><script type="text/javascript" src="__STATIC__/chat/Scripts/common.js?t=1514475239"></script><script type="text/javascript" src="__STATIC__/chat/Scripts/dialog.js?t=1514475239"></script><link rel="stylesheet" href="__STATIC__/chat/Content/common.css?t=1514475239" /><link rel="stylesheet" href="__STATIC__/chat/Content/dialog.css?t=1514475239" />
+<style>
+.modal-dialog {
+  
+}
+body{
+    background-repeat: no-repeat!important;
+  background-position: center top!important;
+  background-size: cover!important;
+  }
+</style>
+</head>
+<body>
+
+<section class="chat " style="background: rgba(255,255,255,);">
+  <section class="chat-header">
+    <div class="pull-left">
+      <ul class="chat-tab">
+        <li data-key="chat" class="current">聊天</li>
+              </ul>
+    </div>
+    <div class="pull-right">
+      
+    </div>
+    <div class="clearfix"></div>
+  </section>
+  <section class="chat-body">
+    <section class="tab-body" data-key="chat">
+      <section class="chat-main" style="right:0px">
+        <div class="btn-bar">
+          <a href="javascript:;" class="btn-bar-open" title="隐藏侧边"></a>
+          <a href="javascript:;" class="btn-bar-close" title="显示侧边"></a>
+        </div>
+        <section class="ad_pc_mt">
+          
+        </section>
+        <section class="showbox">
+          
+        </section>
+        <section class="ad_pc_mb">
+          
+        </section>
+        <section class="chat-footer">
+          <section class="chat-toolbar">
+            <!-- <a href="javascript:;" class="icon-emote">表情</a> -->
+            <div style="width:120px;float:left;">
+            <select name="qr_select" class="form-control"  style="height:28px;padding:1px;">
+                <option value="">快捷回复</option>
+                   {foreach name="qr_select" id="v"}
+                       <option value="{$v['content']}">{$v['title']}</option>
+                   {/foreach}
+            </select>
+            </div>
+          </section>
+          <section class="chat-input">
+            <textarea class="inputbox" name="content"></textarea>
+          </section>
+          <section class="chat-bottom">
+            <div class="pull-left">
+              
+            </div>
+            <div class="pull-right">
+                          <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-info btn-send">发送</button>
+                  <!-- <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                  </button> -->
+                  <!-- <ul class="dropdown-menu send-key-set" role="menu">
+                      <li class="key-enter"><a href="#"><span class="glyphicon glyphicon-ok"></span> 按Enter键发送消息</a></li>
+                      <li class="key-ctrl-enter"><a href="#"><span class="glyphicon glyphicon-ok"></span> 按Ctrl+Enter键发送消息</a></li>
+                  </ul> -->
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </section>
+        </section>
+
+
+
+
+  <div class="box_emote"></div>
+
+
+
+
+      </section>
+      <section class="chat-right" style="width:0px">
+        
+      </section>
+    </section>
+    <section class="tab-body" data-key="web">
+      <iframe class="frame" width="100%" height="100%" frameborder="0" src="about:blank"></iframe>
+    </section>
+  </section>
+</section>
+<script language="JavaScript"> 
+$('select[name="qr_select"]').change(function(){
+    $('textarea[name="content"]').val($(this).val());
+})
+</script>
+
+<script type="text/javascript">
+function closeWin(){
+  $("#hide-miniwin").modal('hide');
+}
+function openWin(href,title,maxwidth,maxheight,reload,bgcolor){
+  if(href.indexOf('?')==-1){
+    href+='?miniwin=1';
+  }else{
+    href+='&miniwin=1';
+  }
+  if(typeof bgcolor=='undefined' || bgcolor==''){
+    bgcolor='#ffffff';
+  }
+  $('#hide-miniwin h4').text(title);
+  if(isNaN(maxwidth)){
+    maxwidth=800;
+  }
+  var w=$(window).width()-80;
+  if(w>maxwidth){
+    w=maxwidth;
+  }
+  if(isNaN(maxheight)){
+    maxheight=600;
+  }
+  var h=$(window).height()-60;
+  if(h>maxheight){
+    h=maxheight;
+  }
+  $('#hide-miniwin .modal-dialog').css({width:w+'px',height:h+'px'});
+  $('#hide-miniwin .modal-body').css({padding:'0px'});
+  $("#NoPermissioniframe").attr("src", href);
+  var win=$("#hide-miniwin").draggable({
+		cursor: "move",
+		handle: '.modal-header'
+	}).modal({backdrop: '__STATIC__', keyboard: false});
+  if(typeof reload!='undefined' && reload=='1'){
+    win.on('hide.bs.modal',function(){
+      location.reload();
+    })
+  }else{
+    win.on('hide.bs.modal',function(){
+      $('.modal-home').removeClass('modal-full');
+      $("#NoPermissioniframe").attr("src", 'about:blank');
+    });
+  }
+  var _scrollHeight = $(document).scrollTop();
+  var wHeight = $(window).height();
+  var this_height=wHeight-60;
+  var this_top=(wHeight-this_height)/2+_scrollHeight+"px";
+  var this_top=(wHeight-h)/2+"px";
+
+  
+  var myifmcss={height:h-50+'px'};//iframe样式
+  $('#hide-miniwin .modal-dialog').find('.modal-content').css({height: '100%',width: '100%','background-color':bgcolor}).find('h4').html(title||"").end().find('.modal-body').find("#NoPermissioniframe").css(myifmcss).attr('data-height',h-50);
+}
+$(function(){
+  $('.btn-max').bind('click',function(){
+    $('.modal-home').addClass('modal-full');
+    $('.modal-home #NoPermissioniframe').height($(window).height()-$('.modal-header').height()-20);
+  });
+  $('.btn-small').bind('click',function(){
+    $('.modal-home').removeClass('modal-full');
+    $('.modal-home #NoPermissioniframe').height(parseInt($('.modal-home #NoPermissioniframe').attr('data-height')));
+  });
+  $(window).bind('resize',function(){
+    $('.modal-full #NoPermissioniframe').height($(window).height()-$('.modal-header').height()-20);
+  });
+  $('a.onez-miniwin').each(function(){
+    $(this).attr('data-href',$(this).attr('href'));
+    $(this).attr('href','javascript:;');
+    $(this).click(function(){
+      var href=$(this).attr('data-href');
+      openWin(href,$(this).attr('data-title'),parseInt($(this).attr('data-width')+''),parseInt($(this).attr('data-height')+''),$(this).attr('data-reload'),$(this).attr('data-bgcolor'));
+    });
+  });
+});
+</script>
+
+<script type="text/javascript">
+var onez=onez||{};
+onez.viewpic=function(){
+};
+$(function(){
+  var p=$('.viewpic').parents('tr');
+  if(p.length<1){
+    p=$('.viewpic').parent();
+  }
+  p.viewer();
+});
+var onez=onez||{};
+var group=new onezgroup('.chat',{
+  id_friend:'11',
+  id_me:'51',
+  pluginurl:'http://120.79.39.52:8088/plugins/chat.group.common'
+});
+</script>
+<!--[if lte IE 6]>
+  <script type="text/javascript" src="http://120.79.39.52:8088/plugins/bootstrap/js/bootstrap-ie.js"></script>
+  <![endif]--><script type="text/javascript" src="__STATIC__/chat/Scripts/bootbox.js"></script><script type="text/javascript" src="__STATIC__/chat/Scripts/onez.js"></script><link rel="stylesheet" href="__STATIC__/chat/Content/viewer.min.css">
+<script src="__STATIC__/chat/Scripts/viewer.min.js"></script><div id="talk-div" style="display:none" data-userid="51" data-href-dialog="?_p=chat.group.plugin.talk&_m=pageshow&mod=%2Fdialog.php&miniwin=1&sitetoken=main" data-href-last="?_p=chat.group.plugin.talk&_m=pageshow&mod=%2Flast.php&miniwin=1&sitetoken=main" data-href-onez="?_p=chat.group.plugin.talk&_m=pageshow&mod=%2Fonez.php&miniwin=1&sitetoken=main"></div>
+</body>
+</html>
+<script type="text/javascript">
+var talkTo=function(uid,uname,avatar){
+  var app=$('[data-idtype="uid"][data-id="'+uid+'"]');
+  if(app.length>0){
+    app.trigger('click');
+    return;
+  }
+  var href=$('#talk-div').attr('data-href-dialog');
+  href+='&uid='+uid;
+  var w=640,width=w;
+  var h=480,height=h;
+  window.open(href,"user-"+uid,"toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width="+width+",height="+height+",left="+((screen.width-width)/2+Math.floor(Math.random()*100))+",top="+((screen.height-height)/2+Math.floor(Math.random()*100)));
+};
+</script><div id="talk-div" style="display:none" data-userid="51" data-href-dialog="?_p=chat.group.plugin.talk&_m=pageshow&mod=%2Fdialog.php&miniwin=1&sitetoken=main" data-href-last="?_p=chat.group.plugin.talk&_m=pageshow&mod=%2Flast.php&miniwin=1&sitetoken=main" data-href-onez="?_p=chat.group.plugin.talk&_m=pageshow&mod=%2Fonez.php&miniwin=1&sitetoken=main"></div>

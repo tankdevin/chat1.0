@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9,chrome=1">
+<title>乐游客服系统</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta http-equiv="refresh" content="5">
+<script src="__STATIC__/chat/Scripts/jquery-1.9.1.min.js"></script><script src="__STATIC__/chat/Scripts/jquery-ui.min.js"></script><link rel="stylesheet" href="__STATIC__/chat/Content/bootstrap.min.css"><!--[if lte IE 6]>
+  <link rel="stylesheet" type="text/css" href="http://120.79.39.52:8088/plugins/bootstrap/css/bootstrap-ie6.min.css">
+  <link rel="stylesheet" type="text/css" href="http://120.79.39.52:8088/plugins/bootstrap/css/ie.css">
+  <![endif]-->
+    <!--[if lt IE 9]>
+  <script src="http://120.79.39.52:8088/plugins/bootstrap/js/html5shiv.min.js"></script>
+  <script src="http://120.79.39.52:8088/plugins/bootstrap/js/respond.min.js"></script>
+  <![endif]--><script src="__STATIC__/chat/Scripts/bootstrap.js"></script><style>
+body{
+  background-image: url(__STATIC__/chat/Images/bg.jpg)!important;
+}
+</style><link rel="stylesheet" href="__STATIC__/chat/Content/home.css" />
+<link rel="stylesheet" href="__STATIC__/chat/Content/style.css" />
+<style>
+.modal-dialog {
+  
+}
+body{
+    background-repeat: repeat;
+  background-size: inherit;
+    background-color:#fbfbfb;
+}
+.friend-list li{
+	overflow: hidden; /*自动隐藏文字*/
+	width: 20em;/*不允许出现半汉字截断*/
+}
+</style>
+</head>
+<body>
+
+<section class="home">
+  <div class="container" style="padding: 50px 0">
+    <div class="row">
+      <div class="panel-friend">
+      	<div class="panel-heading">
+          <div class="">
+            <div class="pull-right">
+                          <img src="__STATIC__/chat/Picture/e05d74759db1260288a0021d6a22336e_1.jpg" width="32" height="32" style="border-radius: 50%" />
+              {$name},你好！
+                            <a href="{:url('login/loginout')}" class="btn btn-danger">退出</a>
+                        </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <div class="panel-body">
+    <ul class="friend-list">
+    	{foreach name="friends" id="rs"}
+			<li data-friendid="{$rs.friendid}" class="{$rs.classname}">
+        <a href="javascript:;" onclick="talkTo('{$rs.friendid}','{$rs.nickname}','{$rs.chat_id}','__STATIC__/chat/Picture/play1.jpg')" class="{if $rs.new==1} new{/if}">
+					<div class="icons icon-manage-verify" data-tag="mana_verifyr"><img src="__STATIC__/chat/Picture/e05d74759db1260288a0021d6a22336e.jpg" /></div>
+					<dl data-tag="click">
+						<dt class="color-tit" data-tag="mana_verify">{$rs.nickname}</dt>
+						<dd data-tag="mana_verify">
+							<p data-tag="mana_verify">{$rs.summary}</p>
+						</dd>
+            <div class="clearfix"></div>
+					</dl>
+				</a>
+			</li>
+          {/foreach}
+		</ul>
+    <div class="box-footer clearfix">
+      
+    </div>
+      
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="copyright">
+  Powered by Thinkphp v5.0.12 | Copyright © niubi.com All rights reserved.
+</section>
+<script language="javascript"> 
+/* setInterval(function(){
+	$.ajax({
+		type:"POST",
+		url: "chat/index",
+		data:"1",
+		dataType:"text",
+		async:false  
+	});
+},3000); */
+/* function Ajapost(){
+	$.ajax({
+		type:"POST",
+		url: "chat/login/loginout",
+		data:"退出",
+		dataType:"text",
+		async:false  
+	});
+}
+var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串    
+var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器    
+var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器  
+var isIE11 = userAgent.indexOf("rv:11.0") > -1; //判断是否是IE11浏览器  
+var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器 
+if(!isIE && !isEdge && !isIE11){  
+    var _beforeUnload_time = 0, _gap_time = 0; //兼容chrome和firefox 
+    var is_fireFox = navigator.userAgent.indexOf("Firefox")>-1;//是否是火狐浏览器  
+    window.onunload = function (){  
+        _gap_time = new Date().getTime() - _beforeUnload_time;  
+        if(_gap_time <= 5){  
+        	$.post('chat/login/loginout');//浏览器关闭  
+        }else{//浏览器刷新  
+        }  
+    }  
+    window.onbeforeunload = function (){   
+        _beforeUnload_time = new Date().getTime();  
+        if(is_fireFox){//火狐关闭执行  
+        	$.post('chat/login/loginout');//浏览器关闭  
+        }   
+    };  
+} 
+if(isIE) {//兼容ie8,9,10  
+    window.onbeforeunload = function() {  
+        //alert(0);  
+        flagiii = "1";  
+        $.ajax({  
+            type: "post",  
+            url: "webLoginController.do?A",  
+            data:{"flagiii": flagiii},  
+            success: function() {  
+  
+            },  
+            async:false  
+        });  
+                  
+    }  
+    window.onunload = onclose;  
+    function onclose(){  
+        flagiii = "0";  
+        Ajapost() 
+    }  
+}  */ 
+</script> 
+
+<script type="text/javascript">
+function closeWin(){
+  $("#hide-miniwin").modal('hide');
+}
+function openWin(href,title,maxwidth,maxheight,reload,bgcolor){
+  if(href.indexOf('?')==-1){
+    href+='?miniwin=1';
+  }else{
+    href+='&miniwin=1';
+  }
+  if(typeof bgcolor=='undefined' || bgcolor==''){
+    bgcolor='#ffffff';
+  }
+  $('#hide-miniwin h4').text(title);
+  if(isNaN(maxwidth)){
+    maxwidth=800;
+  }
+  var w=$(window).width()-80;
+  if(w>maxwidth){
+    w=maxwidth;
+  }
+  if(isNaN(maxheight)){
+    maxheight=600;
+  }
+  var h=$(window).height()-60;
+  if(h>maxheight){
+    h=maxheight;
+  }
+  $('#hide-miniwin .modal-dialog').css({width:w+'px',height:h+'px'});
+  $('#hide-miniwin .modal-body').css({padding:'0px'});
+  $("#NoPermissioniframe").attr("src", href);
+  var win=$("#hide-miniwin").draggable({
+		cursor: "move",
+		handle: '.modal-header'
+	}).modal({backdrop: '__STATIC__', keyboard: false});
+  if(typeof reload!='undefined' && reload=='1'){
+    win.on('hide.bs.modal',function(){
+      location.reload();
+    })
+  }else{
+    win.on('hide.bs.modal',function(){
+      $('.modal-home').removeClass('modal-full');
+      $("#NoPermissioniframe").attr("src", 'about:blank');
+    });
+  }
+  var _scrollHeight = $(document).scrollTop();
+  var wHeight = $(window).height();
+  var this_height=wHeight-60;
+  var this_top=(wHeight-this_height)/2+_scrollHeight+"px";
+  var this_top=(wHeight-h)/2+"px";
+
+  
+  var myifmcss={height:h-50+'px'};//iframe样式
+  $('#hide-miniwin .modal-dialog').find('.modal-content').css({height: '100%',width: '100%','background-color':bgcolor}).find('h4').html(title||"").end().find('.modal-body').find("#NoPermissioniframe").css(myifmcss).attr('data-height',h-50);
+}
+$(function(){
+  $('.btn-max').bind('click',function(){
+    $('.modal-home').addClass('modal-full');
+    $('.modal-home #NoPermissioniframe').height($(window).height()-$('.modal-header').height()-20);
+  });
+  $('.btn-small').bind('click',function(){
+    $('.modal-home').removeClass('modal-full');
+    $('.modal-home #NoPermissioniframe').height(parseInt($('.modal-home #NoPermissioniframe').attr('data-height')));
+  });
+  $(window).bind('resize',function(){
+    $('.modal-full #NoPermissioniframe').height($(window).height()-$('.modal-header').height()-20);
+  });
+  $('a.onez-miniwin').each(function(){
+    $(this).attr('data-href',$(this).attr('href'));
+    $(this).attr('href','javascript:;');
+    $(this).click(function(){
+      var href=$(this).attr('data-href');
+      openWin(href,$(this).attr('data-title'),parseInt($(this).attr('data-width')+''),parseInt($(this).attr('data-height')+''),$(this).attr('data-reload'),$(this).attr('data-bgcolor'));
+    });
+  });
+});
+</script>
+<!--[if lte IE 6]>
+  <script type="text/javascript" src="http://120.79.39.52:8088/plugins/bootstrap/js/bootstrap-ie.js"></script>
+  <![endif]--><script type="text/javascript" src="__STATIC__/chat/Scripts/bootbox.js"></script><script type="text/javascript" src="__STATIC__/chat/Scripts/onez.js"></script><script type="text/javascript" src="__STATIC__/chat/Scripts/socket.io.js"></script><link rel="stylesheet" href="__STATIC__/chat/Content/animate.min.css" />
+<script type="text/javascript" src="__STATIC__/chat/Scripts/jquery.animate.js"></script><link rel="stylesheet" href="__STATIC__/chat/Content/common.css?t=1514475239" />
+<div class="modal modal-dialog-user" style="display: none">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-close" data-dismiss="modal"><i class="glyphicon glyphicon-remove" style="font-size: 28px"></i></button>
+        <button type="button" class="close btn-max"><i class="glyphicon glyphicon-resize-full" style="font-size: 20px;margin:3px"></i></button>
+        <button type="button" class="close btn-small"><i class="glyphicon glyphicon-resize-small" style="font-size: 20px;margin:3px"></i></button>
+        <button type="button" class="close btn-min"><i class="glyphicon glyphicon-resize-min" style="font-size: 20px;margin:3px"></i></button>
+        <h4 class="modal-title">系统提示</h4>
+      </div>
+      <div class="modal-body"><iframe src="about:blank" width="100%" height="100%" frameborder="0" allowtransparency="true" style="background-color=transparent" ></iframe></div>
+    </div>
+  </div>
+</div>
+<div id="talk-div" style="display:none" data-userid="51" data-href-dialog="?mod=%2Fdialog.php&miniwin=1&_p=chat.group.plugin.talk&_m=pageshow&sitetoken=main" data-href-last="?mod=%2Flast.php&miniwin=1&_p=chat.group.plugin.talk&_m=pageshow&sitetoken=main" data-href-onez="?mod=%2Fonez.php&miniwin=1&_p=chat.group.plugin.talk&_m=pageshow&sitetoken=main"></div><script type="text/javascript" src="__STATIC__/chat/Scripts/common.js?t=1514475239"></script>
+</body>
+</html>

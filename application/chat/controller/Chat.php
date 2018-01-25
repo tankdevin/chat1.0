@@ -11,20 +11,11 @@ class Chat extends Common
         $chatid = input('chat_id');
         if($action=='history'){
             #清除未读消息标识
-//             $chatid = Db::table('customer_chat')
-//             ->where('cs_id',$id)
-//             ->where('guid',$guid)
-//             ->value('id');
             Db::table('customer_msg')
             ->where('chat_id',$chatid)
             ->where('is_read',0)
             ->update(['is_read'=>1]);
             $T=Db::table('customer_msg')
-//                 ->alias('m')
-//                 ->field('m.*,c.cs_id,c.guid')
-//                 ->join('customer_chat c','m.chat_id = c.id')
-//                 ->where('c.cs_id',$id)
-//                 ->where('c.guid',$guid)
                 ->where('chat_id',$chatid)
                 ->order('created_at DESC')
                 ->select();
@@ -48,10 +39,6 @@ class Chat extends Common
             return $A;
         }elseif($action == 'send'){
             $message=input('message');
-//             $chatid = Db::table('customer_chat')
-//             ->where('cs_id',$id)
-//             ->where('guid',$guid)
-//             ->value('id');
             $user = Db::table('customer_service')
             ->where('id',$id)
             ->find();

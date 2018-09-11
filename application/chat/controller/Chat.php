@@ -69,7 +69,7 @@ class Chat extends Common
                 'feedbackid' => (int)$msgid1,
                 'updatetime' => time(),
             ]);
-            $serverData = post_curl_c('http://103.90.136.206:8081', 'GMCommand', ['Command' => 'FeedBack', 'Data' => $data, 'sign' => get_c_sign('Command=FeedBack&Data=' . $data)]);
+            $serverData = post_curl_c('http://127.0.0.1:8081', 'GMCommand', ['Command' => 'FeedBack', 'Data' => $data, 'sign' => get_c_sign('Command=FeedBack&Data=' . $data)]);
             return $A;
         }elseif($action == 'touch'){
             $chatData = Db::table('customer_msg')
